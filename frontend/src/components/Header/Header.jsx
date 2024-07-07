@@ -2,6 +2,7 @@ import React from 'react'
 import {Container,Row,Button} from 'reactstrap'
 import { NavLink,Link } from 'react-router-dom'
 import logo from '../../assets/images/logo.png'
+import { useNavigate } from 'react-router-dom'
 import './header.css'
 
 const nav__links=[
@@ -19,6 +20,7 @@ const nav__links=[
   },
 ]
 const Header = () => {
+  const navigate = useNavigate();
   return <header className='header'>
     <Container>
       <Row>
@@ -53,7 +55,7 @@ const Header = () => {
 
           <div className="nav__right d-flex align-items-center gap-4">
             <div className="nav__btns d-flex align-items-center gap-4">
-              <Button className='btn primary__btn'><Link to='/login'>Login</Link></Button>
+              <Button className='btn primary__btn' onClick={()=>navigate('/login')}><Link to='/login'>Login</Link></Button>
               <Button className='btn primary__btn'><Link to='/register'>Register</Link></Button>
 
 
