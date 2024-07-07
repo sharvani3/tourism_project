@@ -1,0 +1,23 @@
+.regtitle{
+    color: black;
+}
+.regc {
+    border-radius: 1.5rem !important;
+    border: 2px solid #86b8ed;
+}
+
+.regbtn{
+    background: #86b8ed !important;
+}
+
+.regbtn:hover{
+    background: #549ce8 !important;
+}
+
+.loginbtn{
+    background: #86b8ed !important;
+}
+
+.loginbtn:hover{
+    background: #549ce8 !important;
+}

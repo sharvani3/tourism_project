@@ -10,7 +10,8 @@ const SearchBar = () => {
       return alert('Enter Location');
     }
   }
-  return <Col lg='20'>
+  return <>
+  <Col lg='20'>
     <div className="search__bar" align='center'>
         <Form className='d-flex align-items-center gap-4'>
             <span>
@@ -24,6 +25,7 @@ const SearchBar = () => {
         </Form>
     </div>
   </Col>
+  </>
 }
 
 export default SearchBar
