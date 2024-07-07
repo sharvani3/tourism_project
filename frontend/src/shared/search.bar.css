@@ -1,3 +1,37 @@
 .search__bar{
     padding: 0.5rem 1rem;
+    align-items: center;
+    border-radius: 50px;
+    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+    width: max-content;
+    margin-top: 50px;
 }
+.search__bar .ri-map-pin-fill {
+    font-size: 24px; 
+    color: #86b8ed; 
+    margin-right: 8px; 
+  }
+
+  .search__bar input {
+    border: none;
+    font-size: 0.9rem;
+    color: var(--heading-color);
+  }
+
+  .search__bar input:focus{
+    outline: none;
+  }
+
+  .search__bar h5{
+    text-align: left !important;
+    margin-bottom: 0;
+  }
+
+  .search__icon{
+    font-size: 1.6rem;
+    padding: 0.5rem;
+    background: #86b8ed;
+    color: #fff;
+    border-radius: 10px 5px 10px 5px;
+    cursor: pointer;
+  }

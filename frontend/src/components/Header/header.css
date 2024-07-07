@@ -20,7 +20,7 @@
 }
 
 .nav__item a.active__link{
-color: burlywood;
+color: #86b8ed;
 }
 
 .mobile__menu{
@@ -41,7 +41,7 @@ color: burlywood;
 }
 
 .primary__btn {
-    background-color: #a6c3e3 !important; /* Blue color for Register button */
+    background-color: #86b8ed !important; /* Blue color for Register button */
     border: none;
     color: white;
     padding: 10px 20px;
