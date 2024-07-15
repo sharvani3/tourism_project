@@ -8,12 +8,15 @@
 }
 .menu{
     margin-bottom: 0;
+    justify-content: center; /* Center the menu items */
+    flex-grow: 1;
 }
 .nav__item a{
    text-decoration: none;
    color: var(--heading-color);
    font-weight: 500;
    font-size: 1.1rem; 
+   margin-right: 40px;
 }
 .nav__item a:hover{
     color: inherit;
@@ -41,7 +44,7 @@ color: #86b8ed;
 }
 
 .primary__btn {
-    background-color: #86b8ed !important; /* Blue color for Register button */
+    background-color: #091966 !important; /* Blue color for Register button */
     border: none;
     color: white;
     padding: 10px 20px;

@@ -6,7 +6,7 @@ import ServiceList from '../services/ServiceList';
 
 const Home = () => {
   return (
-    <>
+    <div className='homec'>
       <section>
       <Container>
         <Row>
@@ -36,7 +36,7 @@ const Home = () => {
       </Container>
     </section>
     {/* featured tours end */}
-    </>
+    </div>
     
     
   )

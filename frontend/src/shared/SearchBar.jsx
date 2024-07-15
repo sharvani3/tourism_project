@@ -11,14 +11,14 @@ const SearchBar = () => {
     }
   }
   return <>
-  <Col lg='20'>
+  <Col lg='100'>
     <div className="search__bar" align='center'>
         <Form className='d-flex align-items-center gap-4'>
             <span>
             <i class="ri-map-pin-fill"></i>
             </span>
             <div>
-                <h5>Location</h5>
+                
                 <input type='text' placeholder='explore places' ref={locationref}/>
             </div>
             <span className="search__icon" type='submit' onClick={searchHandler}><i class="ri-search-line"></i></span>

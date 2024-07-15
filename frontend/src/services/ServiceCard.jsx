@@ -2,7 +2,7 @@ import React from 'react';
 import './service-card.css';
 
 const ServiceCard = ({ item }) => {
-  const { imgUrl, title, desc } = item; // Use imgUrl instead of imgurl
+  const { imgUrl, title, desc } = item;
 
   return (
     <div className='service__item'>
