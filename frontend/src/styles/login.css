@@ -16,7 +16,7 @@
 
 }
 
-.login_-container{
+.login__container{
     box-shadow: rgba(17,12,46,0.15) 0px 48px 100px 0px;
     margin-top: 100px;
 }
@@ -59,9 +59,9 @@
 }
 
 .auth__btn{
-    background: var(--heading-color) ;
+    background: #091966 !important;
     width: 100%;
-    color: #fff;
+    color: #fff !important;
 }
 
 .login__form p{

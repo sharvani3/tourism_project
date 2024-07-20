@@ -3,6 +3,7 @@ import '../styles/home.css'
 import SearchBar from '../shared/SearchBar';
 import { Container, Row,Col } from 'reactstrap';
 import ServiceList from '../services/ServiceList';
+import Itinerary from '../services/Itinerary';
 
 const Home = () => {
   return (
@@ -21,6 +22,14 @@ const Home = () => {
           <h3 className='services__title'>Our Services</h3>
           </Col>
           <ServiceList></ServiceList>
+        </Row>
+      </Container>
+    </section>
+
+    <section>
+      <Container>
+        <Row>
+          <Itinerary></Itinerary>
         </Row>
       </Container>
     </section>

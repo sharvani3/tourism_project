@@ -63,7 +63,7 @@ import userIcon from '../assets/images/userIcon.png'
             <div className="user">
             <img src={userIcon} alt="" />  
             </div>
-            <h2>Login</h2>
+            <h2>Login Here!</h2>
 
             <Form onSubmit={handleClick}>
               <FormGroup >
@@ -71,10 +71,10 @@ import userIcon from '../assets/images/userIcon.png'
                 onChange={handleChange}/>
               </FormGroup>
               <FormGroup>
-                <input type = "password" placeholder="password" required id ="password"
+                <input type = "password" placeholder="Password" required id ="password"
                 onChange={handleChange}/>
               </FormGroup>
-              <Button className="btn secondary__btn auth__btn" type="submit">Login</Button>
+              <Button className="btn secondary__btn auth__btn" type="submit" style={{ color: 'white' }}>Login</Button>
             </Form>
             <p> Don't have an account?<Link to ='/register' >create</Link></p>
 

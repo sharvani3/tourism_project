@@ -1,13 +1,16 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from 'axios';
 import '../styles/register.css';
+
+import regImg from '../assets/images/regimg.png'
+import userIcon from '../assets/images/userIcon.png'
+import { Container,Row,Col } from "reactstrap";
 
 function Register() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,19 +28,24 @@ function Register() {
     }
   };
 
-  const handleLoginClick = () => {
-    navigate('/login');
-  };
+
 
   return (
-    <div className="d-flex justify-content-center align-items-center vh-100">
-      <div className="regc p-4 rounded w-25">
-        <h2 className="regtitle">Register Here!</h2>
-        <form onSubmit={handleSubmit}>
+    <section>
+      <Container>
+        <Row>
+          <Col lg='8' className='m-auto'>
+            <div className="reg__container d-flex justify-content-between">
+              <div className="reg__img">
+                <img src={regImg} alt=""/>
+              </div>
+              <div className="reg__form">
+                <div className="user">
+                  <img src={userIcon} alt=""/>
+                </div>
+                <h2>Sign Up Here!</h2>
+                <form onSubmit={handleSubmit}>
           <div className="mb-3">
-            <label htmlFor="username">
-              <strong>Name</strong>
-            </label>
             <input
               type="text"
               placeholder="Enter Name"
@@ -48,9 +56,6 @@ function Register() {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="email">
-              <strong>Email</strong>
-            </label>
             <input
               type="email"
               placeholder="Enter Email"
@@ -61,9 +66,6 @@ function Register() {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="password">
-              <strong>Password</strong>
-            </label>
             <input
               type="password"
               placeholder="Enter Password"
@@ -76,12 +78,14 @@ function Register() {
             Register
           </button>
         </form>
-        <p>Already Have an Account?</p>
-        <button onClick={handleLoginClick} className="loginbtn btn w-100 rounded">
-          Login
-        </button>
-      </div>
-    </div>
+        <p>Already Have an Account?<Link to='/login'>login</Link></p>
+
+              </div>
+            </div>
+          </Col>
+        </Row>
+      </Container>
+    </section>
   );
 }
 
