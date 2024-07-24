@@ -1,0 +1,79 @@
+.itinerary__container {
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+  margin-top: 100px;
+  background: #86b8ed;
+  padding: 20px;  /* Adjusted padding */
+  border-radius: 10px;
+  width: 300px;  /* Fixed width */
+  height: 300px;  /* Fixed height to make it square */
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.itinerary__container h2 {
+  color: #fff;
+  text-align: center;
+  margin-bottom: 1rem;  /* Adjusted margin */
+}
+
+.location,
+.start__field,
+.end__field {
+  margin-bottom: 0.5rem;  /* Adjusted margin */
+  width: 100%;  /* Ensure fields take full width of the container */
+}
+
+.location label,
+.start__field label,
+.end__field label {
+  color: #fff;
+  font-size: 0.9rem;  /* Adjusted font size */
+  font-weight: 500;
+  display: block;
+  margin-bottom: 0.3rem;  /* Adjusted margin */
+}
+
+.location input,
+.start__field input,
+.end__field input {
+  width: 100%;
+  padding: 0.3rem 0.8rem;  /* Adjusted padding */
+  border-radius: 5px;
+  border: none;
+  font-size: 0.9rem;  /* Adjusted font size */
+  color: var(--heading-color);
+}
+
+.location input:focus,
+.start__field input:focus,
+.end__field input:focus {
+  outline: none;
+}
+
+.btn__submit {
+  background: #091966;
+  color: #fff;
+  padding: 0.3rem 0.8rem;  /* Adjusted padding */
+  border: none;
+  border-radius: 5px;
+  font-size: 0.9rem;  /* Adjusted font size */
+  cursor: pointer;
+  margin-top: 0.5rem;  /* Ensure some space above the button */
+}
+
+.btn__submit:hover {
+  background: #25488f;
+}
+
+@media (max-width: 768px) {
+  .itinerary__container {
+    width: 80%;
+    height: auto;  /* Allow height to adjust */
+    padding: 15px;  /* Adjust padding */
+    aspect-ratio: 1;  /* Maintain a square aspect ratio */
+  }
+}
