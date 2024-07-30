@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios';
-import '../styles/register.css';
+import '../../styles/register.css';
 
-import regImg from '../assets/images/regimg.png'
-import userIcon from '../assets/images/userIcon.png'
+import regImg from '../../assets/images/regimg.png'
+import userIcon from '../../assets/images/userIcon.png'
 import { Container,Row,Col } from "reactstrap";
 
 function Register() {

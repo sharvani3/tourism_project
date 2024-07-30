@@ -3,13 +3,13 @@ import{Container,Row,Col,Form, FormGroup, Button } from 'reactstrap';
 import { useState, useContext}  from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios';
-import { AuthContext } from "../components/authcontext";
+import { AuthContext } from "./authcontext";
 import { useNavigate } from "react-router-dom";
-import '../styles/login.css'
+import '../../styles/login.css'
 
 
-import loginImg from '../assets/images/login.jpg'
-import userIcon from '../assets/images/userIcon.png'
+import loginImg from '../../assets/images/login.jpg'
+import userIcon from '../../assets/images/userIcon.png'
  // node
  //const axios = require ('axios')
 
