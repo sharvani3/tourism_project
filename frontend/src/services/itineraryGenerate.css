@@ -61,3 +61,8 @@ li {
 .itinerary-content section > ul > li > ul > li {
   font-weight: normal;
 }
+.save-itinerary-button{
+  background: #091966 !important;
+    width: 100%;
+    color: #fff !important;
+}

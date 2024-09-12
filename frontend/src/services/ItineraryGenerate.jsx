@@ -17,7 +17,7 @@ const ItineraryGenerate = () => {
 
   useEffect(() => {
     const generateItinerary = async () => {
-      const apikey = "AIzaSyDGL4Ic5bjIslpShWSMw856IcJrJ669RB8";
+      const apikey = "AIzaSyDGL4Ic5bjIslpShWSMw856IcJrJ669RB8"; // Be cautious with exposing API keys
       const genAI = new GoogleGenerativeAI(apikey);
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
@@ -82,6 +82,29 @@ const ItineraryGenerate = () => {
     setItineraryData(parsedData);
   };
 
+  const saveItinerary = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/api/itineraries/save', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          ...itineraryData,
+          destination // Include destination name with the saved data
+        })
+      });
+
+      if (response.ok) {
+        alert('Itinerary saved successfully!');
+      } else {
+        alert('Failed to save itinerary');
+      }
+    } catch (error) {
+      console.error('Error saving itinerary:', error);
+    }
+  };
+
   const renderSection = (title, data, renderItem) => {
     if (!data || data.length === 0) return null;
     return (
@@ -121,6 +144,9 @@ const ItineraryGenerate = () => {
             </section>
           )}
           {renderSection("Travel Tips", itineraryData.tips, item => item)}
+          <button onClick={saveItinerary} className="save-itinerary-button">
+            Save Itinerary
+          </button>
         </div>
       )}
     </div>

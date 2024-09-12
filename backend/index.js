@@ -1,74 +1,36 @@
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-
 const cors = require('cors');
-require('dotenv').config()
-const PORT = process.env.PORT
+require('dotenv').config();
 const express = require('express');
 const app = express();
-const authRoute = require("./routes/auth.route")
+const authRoute = require("./routes/auth.route");
+const itineraryRoutes = require('./routes/itinerary'); // Import itinerary routes
 
+// Middleware
+app.use(express.json());
 app.use(bodyParser.json());
+app.use(cors({ origin: 'http://localhost:3000' }));
 
-
-
-app.use(express.json())
-app.use(cors({origin:'http://localhost:3000'}))
-
-
-app.use('/api/auth',authRoute)
-
-mongoose.connect(process.env.MONGODBURL,{useNewUrlParser:true,useUnifiedTopology:true}).then(()=>console.log('mongo connected')).catch(err=>console.log('error',err))
-app.get('/',(req,res)=>{res.json('server is ready')});
+// Routes
+app.use('/api/itineraries', itineraryRoutes);
+app.use('/api/auth', authRoute);
 
 mongoose.connect(process.env.MONGODBURL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected'))
-  .catch(err => console.log(err));
+  .catch(err => console.log('Error connecting to MongoDB:', err));
 
-const ItinerarySchema = new mongoose.Schema({
-  location: String,
-  startDate: Date,
-  endDate: Date,
-  places: Array
+// Basic route to check if the server is running
+app.get('/', (req, res) => {
+  res.json('Server is ready');
 });
 
-const Itinerary = mongoose.model('Itinerary', ItinerarySchema);
-
-// Generate itinerary
-app.post('/api/itinerary', async (req, res) => {
-  const { location, startDate, endDate } = req.body;
-
-  try {
-    const response = await axios.get(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=points+of+interest+in+${location}&key=${process.env.GOOGLE_API_KEY}`);
-    const places = response.data.results.map(place => ({
-      name: place.name,
-      address: place.formatted_address,
-      rating: place.rating,
-      user_ratings_total: place.user_ratings_total
-    }));
-
-    const itinerary = new Itinerary({
-      location,
-      startDate,
-      endDate,
-      places
-    });
-
-    await itinerary.save();
-    res.json(itinerary);
-  } catch (error) {
-    res.status(500).send('Error generating itinerary');
-  }
+// Error handling middleware (optional but helpful)
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
 });
 
-// Get all itineraries
-app.get('/api/itineraries', async (req, res) => {
-  try {
-    const itineraries = await Itinerary.find();
-    res.json(itineraries);
-  } catch (error) {
-    res.status(500).send('Error fetching itineraries');
-  }
-});
-
-app.listen(PORT,()=>console.log('server is running on 7800'));
+// Set the PORT, with a fallback to 7800 if not set in .env
+const PORT = process.env.PORT || 7800;
+app.listen(PORT, () => console.log(`Server is running on ${PORT}`));

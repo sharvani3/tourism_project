@@ -35,7 +35,8 @@ const Home = () => {
     </section>
 
     {/* featured tours start */}
-    <section>
+    
+      {/*<section>
       <Container>
         <Row>
           <Col lg='12' className='mb-5'>
@@ -44,6 +45,7 @@ const Home = () => {
         </Row>
       </Container>
     </section>
+      */}
     {/* featured tours end */}
     </div>
     

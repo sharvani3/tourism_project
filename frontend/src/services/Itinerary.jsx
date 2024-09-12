@@ -7,14 +7,24 @@ const Itinerary = () => {
   const [location, setLocation] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [itinerary, setItinerary] = useState(null);
+  const [error, setError] = useState(""); // State to store error messages
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Reset error message
+    setError("");
+
+    // Check if start date is less than end date
+    if (new Date(startDate) >= new Date(endDate)) {
+      setError("End Date must be later than Start Date.");
+      return;
+    }
+
     try {
-      //const response = await axios.post('/api/itinerary', { location, startDate, endDate });
-      //setItinerary(response.data);
+      // const response = await axios.post('/api/itinerary', { location, startDate, endDate });
+      // setItinerary(response.data);
       // Navigate to ItineraryGenerate component after setting the itinerary
       navigate("/itineraryGenerate", { 
         state: { 
@@ -39,6 +49,7 @@ const Itinerary = () => {
               type="text"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
+              required // Make this field mandatory
             />
           </div>
           <div className="start__field">
@@ -47,6 +58,7 @@ const Itinerary = () => {
               type="date"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
+              required // Make this field mandatory
             />
           </div>
           <div className="end__field">
@@ -55,8 +67,10 @@ const Itinerary = () => {
               type="date"
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
+              required // Make this field mandatory
             />
           </div>
+          {error && <p className="error">{error}</p>} {/* Display error message */}
           <button className="btn__submit" type="submit">
             Submit
           </button>

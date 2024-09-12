@@ -1,37 +1,43 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [token, setToken] = useState(null);
-  const [userId, setUserId] = useState(null);
+  // Check for token in localStorage when the app starts
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [token, setToken] = useState('');
 
-  const login = (newToken, newUserId) => {
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    if (storedToken) {
+      setToken(storedToken);
+      setIsLoggedIn(true); 
+      console.log("logged usefeect"); // Set as logged in if token exists
+    } else {
+      setIsLoggedIn(false); 
+      console.log("logged useeffect"); // No token, so not logged in
+    }
+  }, []);
+
+  const login = (newToken) => {
     setToken(newToken);
-    setUserId(newUserId);
-    setIsLoggedIn(true)
+    setIsLoggedIn(true);
     localStorage.setItem('token', newToken);
-    localStorage.setItem('userId', newUserId);
+    console.log("logged");
   };
 
   const logout = () => {
     setToken(null);
-    setUserId(null);
-    setIsLoggedIn(false)
+    setIsLoggedIn(false);
     localStorage.removeItem('token');
-    localStorage.removeItem('userId');
+    console.log("logged out");
   };
 
-  const authContextValue = {
-    token,
-    userId,
-    isLoggedIn,
-    login,
-    logout,
-  };
-
-  return <AuthContext.Provider value={authContextValue}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ isLoggedIn, token, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export default AuthProvider;
