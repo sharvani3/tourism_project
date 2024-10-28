@@ -8,6 +8,7 @@ import SearchResultList from './../pages/SearchResultList';
 import AuthProvider from '../components/auth/authcontext';
 import ItineraryGenerate from '../services/ItineraryGenerate';
 import Profile from '../pages/Profile';
+import MyTrips from '../pages/MyTrips';
 const Routers = () => {
   return (
    <AuthProvider>
@@ -21,6 +22,7 @@ const Routers = () => {
         <Route path='/tours/search' element={<SearchResultList/>}/>
         <Route path='/ItineraryGenerate' element={<ItineraryGenerate/>}/>
         <Route path='/profile' element={<Profile/>}/>
+        <Route path="/mytrips" element={<MyTrips />} />
     </Routes>
     </AuthProvider>
    

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import './itineraryGenerate.css';
 
@@ -14,6 +14,7 @@ const ItineraryGenerate = () => {
   const [loading, setLoading] = useState(true);
   const location = useLocation();
   const { destination, startDate, endDate } = location.state || {};
+  const navigate = useNavigate();
 
   useEffect(() => {
     const generateItinerary = async () => {
@@ -39,7 +40,7 @@ const ItineraryGenerate = () => {
 
   const parseItineraryContent = (content) => {
     const lines = content.split('\n');
-    let currentSection = '';
+    let currentSection = ''; // Properly declare the currentSection variable
     const parsedData = {
       title: '',
       accommodation: [],
@@ -79,24 +80,27 @@ const ItineraryGenerate = () => {
       }
     });
 
-    setItineraryData(parsedData);
+    setItineraryData({
+      ...parsedData,
+      destination,
+      startDate,
+      endDate
+    });
   };
 
   const saveItinerary = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/itineraries/save', {
+      const response = await fetch('http://localhost:7800/api/itineraries/save', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          ...itineraryData,
-          destination // Include destination name with the saved data
-        })
+        body: JSON.stringify(itineraryData)
       });
 
       if (response.ok) {
         alert('Itinerary saved successfully!');
+        navigate('/mytrips');
       } else {
         alert('Failed to save itinerary');
       }
