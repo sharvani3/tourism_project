@@ -18,7 +18,7 @@ const ItineraryGenerate = () => {
 
   useEffect(() => {
     const generateItinerary = async () => {
-      const apikey = "AIzaSyDGL4Ic5bjIslpShWSMw856IcJrJ669RB8"; // Be cautious with exposing API keys
+      const apikey = "AIzaSyDGL4Ic5bjIslpShWSMw856IcJrJ669RB8"; 
       const genAI = new GoogleGenerativeAI(apikey);
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
