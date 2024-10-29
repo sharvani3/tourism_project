@@ -12,13 +12,16 @@ const ItineraryGenerate = () => {
     tips: []
   });
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [expandedSection, setExpandedSection] = useState(null);
   const location = useLocation();
   const { destination, startDate, endDate } = location.state || {};
   const navigate = useNavigate();
 
   useEffect(() => {
     const generateItinerary = async () => {
-      const apikey = "AIzaSyDGL4Ic5bjIslpShWSMw856IcJrJ669RB8"; // Be cautious with exposing API keys
+      setLoading(true);
+      const apikey = "AIzaSyDGL4Ic5bjIslpShWSMw856IcJrJ669RB8"; // Replace with your actual API key
       const genAI = new GoogleGenerativeAI(apikey);
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
@@ -26,11 +29,12 @@ const ItineraryGenerate = () => {
 
       try {
         const result = await model.generateContent(prompt);
-        const content = result.response.text();
+        const content = await result.response.text();
         parseItineraryContent(content);
-        setLoading(false);
       } catch (error) {
         console.error('Error generating itinerary:', error);
+        setError('Failed to generate itinerary. Please try again later.');
+      } finally {
         setLoading(false);
       }
     };
@@ -40,7 +44,7 @@ const ItineraryGenerate = () => {
 
   const parseItineraryContent = (content) => {
     const lines = content.split('\n');
-    let currentSection = ''; // Properly declare the currentSection variable
+    let currentSection = '';
     const parsedData = {
       title: '',
       accommodation: [],
@@ -109,44 +113,57 @@ const ItineraryGenerate = () => {
     }
   };
 
+  const toggleSection = (section) => {
+    setExpandedSection(expandedSection === section ? null : section);
+  };
+
   const renderSection = (title, data, renderItem) => {
     if (!data || data.length === 0) return null;
+    const isExpanded = expandedSection === title;
+
     return (
-      <section>
-        <h2>{title}</h2>
-        <ul>
-          {data.map((item, index) => (
-            <li key={index}>{renderItem(item)}</li>
-          ))}
-        </ul>
+      <section className={`section ${isExpanded ? 'expanded' : ''}`}>
+        <div className="section-header" onClick={() => toggleSection(title)}>
+          <h2>{title}</h2>
+          <span className={`toggle-icon ${isExpanded ? 'expanded' : ''}`}>
+            {isExpanded ? '▲' : '▼'}
+          </span>
+        </div>
+        <div className={`section-content ${isExpanded ? 'expanded' : ''}`}>
+          <ul>
+            {data.map((item, index) => (
+              <li key={index}>{renderItem(item)}</li>
+            ))}
+          </ul>
+        </div>
       </section>
     );
   };
 
   return (
-    <div className="itinerary-container">
-      <h1>{itineraryData.title}</h1>
+    <div className="itinerary-generate unique-itinerary-wrapper">
       {loading ? (
         <div className="loader">Generating your personalized itinerary...</div>
+      ) : error ? (
+        <div className="error-message">{error}</div>
       ) : (
         <div className="itinerary-content">
+          <h1>{itineraryData.title}</h1>
           {renderSection("Accommodation", itineraryData.accommodation, item => item)}
           {renderSection("Transportation", itineraryData.transportation, item => item)}
-          {itineraryData.days.length > 0 && (
-            <section>
-              <h2>Daily Itinerary</h2>
-              {itineraryData.days.map((day, index) => (
-                <div key={index} className="day-itinerary">
-                  <h3>{day.title}</h3>
-                  <ul>
-                    {day.activities.map((activity, actIndex) => (
-                      <li key={actIndex}>{activity}</li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </section>
-          )}
+          {renderSection("Daily Itinerary", itineraryData.days.map((day, index) => ({
+            title: day.title,
+            activities: day.activities
+          })), (day) => (
+            <div className="day-itinerary">
+              <h3>{day.title}</h3>
+              <ul>
+                {day.activities.map((activity, actIndex) => (
+                  <li key={actIndex}>{activity}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
           {renderSection("Travel Tips", itineraryData.tips, item => item)}
           <button onClick={saveItinerary} className="save-itinerary-button">
             Save Itinerary
