@@ -1,79 +1,144 @@
-.itinerary__container {
-  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
-  margin-top: 100px;
-  background: #86b8ed;
-  padding: 20px;  /* Adjusted padding */
-  border-radius: 10px;
-  width: 300px;  /* Fixed width */
-  height: 300px;  /* Fixed height to make it square */
-  margin: 0 auto;
+.itinerary-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.itinerary-content {
+  display: flex;
+  gap: 3rem;
+  background: white;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.itinerary-form-section {
+  flex: 1;
+  padding: 2rem;
+}
+
+.itinerary-title {
+  font-size: 2rem;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.itinerary-subtitle {
+  color: #6b7280;
+  margin-bottom: 2rem;
+}
+
+.itinerary-form {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+.input-wrapper {
   position: relative;
 }
 
-.itinerary__container h2 {
-  color: #fff;
-  text-align: center;
-  margin-bottom: 1rem;  /* Adjusted margin */
+.input-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #86b8ed;
 }
 
-.location,
-.start__field,
-.end__field {
-  margin-bottom: 0.5rem;  /* Adjusted margin */
-  width: 100%;  /* Ensure fields take full width of the container */
-}
-
-.location label,
-.start__field label,
-.end__field label {
-  color: #fff;
-  font-size: 0.9rem;  /* Adjusted font size */
-  font-weight: 500;
-  display: block;
-  margin-bottom: 0.3rem;  /* Adjusted margin */
-}
-
-.location input,
-.start__field input,
-.end__field input {
+.itinerary-form input {
   width: 100%;
-  padding: 0.3rem 0.8rem;  /* Adjusted padding */
-  border-radius: 5px;
-  border: none;
-  font-size: 0.9rem;  /* Adjusted font size */
-  color: var(--heading-color);
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: border-color 0.2s;
 }
 
-.location input:focus,
-.start__field input:focus,
-.end__field input:focus {
+.itinerary-form input:focus {
   outline: none;
+  border-color: #86b8ed;
+  box-shadow: 0 0 0 3px rgba(134, 184, 237, 0.2);
 }
 
-.btn__submit {
-  background: #091966;
-  color: #fff;
-  padding: 0.3rem 0.8rem;  /* Adjusted padding */
+.submit-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: #86b8ed;
+  color: white;
+  padding: 1rem;
   border: none;
-  border-radius: 5px;
-  font-size: 0.9rem;  /* Adjusted font size */
+  border-radius: 0.5rem;
+  font-size: 1rem;
   cursor: pointer;
-  margin-top: 0.5rem;  /* Ensure some space above the button */
+  transition: background-color 0.2s;
 }
 
-.btn__submit:hover {
-  background: #25488f;
+.submit-button:hover {
+  background: #6da1d6;
 }
 
-@media (max-width: 768px) {
-  .itinerary__container {
-    width: 80%;
-    height: auto;  /* Allow height to adjust */
-    padding: 15px;  /* Adjust padding */
-    aspect-ratio: 1;  /* Maintain a square aspect ratio */
-  }
+.error-message {
+  color: #dc2626;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+.itinerary-image-section {
+  flex: 1;
+  position: relative;
+  background: #f3f4f6;
+  min-height: 600px;
+}
+
+.planning-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-overlay {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  right: 2rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.feature-card {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  flex: 1;
+}
+
+.feature-card i {
+  font-size: 1.5rem;
+  color: #86b8ed;
+  margin-bottom: 0.5rem;
+}
+
+.feature-card h3 {
+  font-size: 0.875rem;
+  color: #1f2937;
 }

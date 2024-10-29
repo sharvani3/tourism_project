@@ -15,7 +15,7 @@ const Home = () => {
         </Row>
       </Container>
     </section>
-    <section>
+    {/* <section>
       <Container>
         <Row>
           <Col lg='3'>
@@ -24,7 +24,7 @@ const Home = () => {
           <ServiceList></ServiceList>
         </Row>
       </Container>
-    </section>
+    </section> */}
 
     <section>
       <Container>
