@@ -3,38 +3,50 @@ import React, { createContext, useState, useEffect } from 'react';
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  // Check for token in localStorage when the app starts
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState('');
+  const [userName, setUserName] = useState('');
+  const [userId, setUserId] = useState('');
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
-    if (storedToken) {
+    const storedUserName = localStorage.getItem('un');
+    const storedUserId = localStorage.getItem('uid');
+    if (storedToken && storedUserName && storedUserId) {
       setToken(storedToken);
-      setIsLoggedIn(true); 
-      console.log("logged usefeect"); // Set as logged in if token exists
-    } else {
-      setIsLoggedIn(false); 
-      console.log("logged useeffect"); // No token, so not logged in
+      setUserName(storedUserName);
+      setUserId(storedUserId);
+      setIsLoggedIn(true);
     }
   }, []);
 
-  const login = (newToken) => {
-    setToken(newToken);
-    setIsLoggedIn(true);
+  const login = async (newToken, user) => {
+    // Set all states at once to ensure synchronous update
+    await Promise.all([
+      setToken(newToken),
+      setUserName(user.username),
+      setUserId(user.id),
+      setIsLoggedIn(true)
+    ]);
+
+    // Update localStorage
     localStorage.setItem('token', newToken);
-    console.log("logged");
+    localStorage.setItem('uid', user.id);
+    localStorage.setItem('un', user.username);
   };
 
   const logout = () => {
     setToken(null);
     setIsLoggedIn(false);
+    setUserName(null);
+    setUserId(null);
     localStorage.removeItem('token');
-    console.log("logged out");
+    localStorage.removeItem('uid');
+    localStorage.removeItem('un');
   };
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, token, login, logout }}>
+    <AuthContext.Provider value={{ isLoggedIn, token, userName, userId, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

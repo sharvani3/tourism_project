@@ -25,24 +25,15 @@ const Login = () => {
     setCredentials(prev => ({ ...prev, [e.target.id]: e.target.value }));
   };
 
-  // Handle login button click
   const handleClick = async (e) => {
     e.preventDefault();
-    console.log("clicking");
-    
-    const email = credentials.email;
-    const password = credentials.password;
 
     try {
-      // Send login request to your backend
-      const response = await axios.post('http://localhost:7800/api/auth/login', { email, password });
-      
-      const { token } = response.data;  // Assuming the response contains the token
+      const response = await axios.post('http://localhost:7800/api/auth/login', credentials);
+      const { token, user } = response.data;
 
-      // Update the authentication state by calling login with the token
-      login(token);  // Call login from AuthContext with the token
-      
-      setShowPopup(true);  // Show success popup on successful login
+      await login(token, user); // Wait for login completion
+      setShowPopup(true);       // Show success popup
     } catch (err) {
       console.error("Login Error:", err);
     }
@@ -52,6 +43,7 @@ const Login = () => {
   const handleClosePopup = () => {
     setShowPopup(false);
     navigate('/home');  // Navigate to home after closing the popup
+    window.location.reload();    // Reload the page after navigation
   };
 
   return (
@@ -87,8 +79,11 @@ const Login = () => {
                       id="password"
                       onChange={handleChange} 
                     />
-                  </FormGroup></Form>
-                  <Button className="btn secondary__btn auth__btn" type="submit" style={{ color: 'white' }} onClick={handleClick}>Login</Button>
+                  </FormGroup>
+                  <Button className="btn secondary_btn auth_btn" type="submit" style={{ color: 'white' }}>
+                    Login
+                  </Button>
+                </Form>
           
                 <p> Don't have an account? <Link to='/register'>Signup</Link></p>
               </div>
