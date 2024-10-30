@@ -1,52 +1,50 @@
-.login__img{
+/* Login Image Container */
+.login__img {
     width: 60%;
     text-align: center;
 }
 
 .login__img img {
     width: 70%;
-    object-fit:contain;
+    object-fit: contain;
 }
 
-.login__form{
+/* Login Form Container */
+.login__form {
     padding: 50px;
-    background:#86B8ED;
+    background: #86B8ED;
     position: relative;
     border-radius: 10px;
-
+    width: 40%;
 }
 
-.login__container{
-    box-shadow: rgba(17,12,46,0.15) 0px 48px 100px 0px;
+.login__container {
+    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
     margin-top: 100px;
 }
 
-.login__container .user{
-    width:80px;
-    height:80px;
+.login__container .user {
+    width: 80px;
+    height: 80px;
     position: absolute;
     top: -9%;
-    left:50% ;
+    left: 50%;
     transform: translate(-50%, -9%);
 }
 
-.login__form .user img{
+.login__form .user img {
     width: 100%;
 }
 
-.login__form h2{
-    color:#fff;
-    text-align:center;
-    margin-bottom:2rem;
+.login__form h2 {
+    color: #fff;
+    text-align: center;
+    margin-bottom: 2rem;
 }
 
-.login__form{
-    width:40%;
-}
-
-
-.login__form input{
-    width:100%;
+/* Form Input Styling */
+.login__form input {
+    width: 100%;
     padding: 0.5rem 1rem;
     border-radius: 5px;
     border: none;
@@ -54,27 +52,35 @@
     color: var(--heading-color);
 }
 
-.login__form input:focus{
+.login__form input:focus {
     outline: none;
 }
 
-.auth__btn{
-    background: #091966 !important;
-    width: 100%;
-    color: #fff !important;
+/* Updated Button Styling */
+/* Dark Blue Button Styling */
+.auth_btn {
+    background-color: #091966 !important; /* Dark blue color */
+    color: white !important; /* Ensure text is white for contrast */
+    border: none; /* Remove any borders */
 }
 
-.login__form p{
-    font-size: .9rem;
-    color:#fff;
+.auth_btn:hover {
+    background-color: #04124f !important; /* Slightly darker blue on hover */
+}
+
+
+
+/* Form Paragraph Styling */
+.login__form p {
+    font-size: 0.9rem;
+    color: #fff;
     margin-top: 1.5rem;
     text-align: center;
-
 }
 
-.login__form p{
+.login__form p a {
     color: var(--heading-color);
     text-decoration: none;
-    margin-left:5px;
-    font-weight:500;
+    margin-left: 5px;
+    font-weight: 500;
 }

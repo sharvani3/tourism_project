@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Container, Row, Button } from 'reactstrap';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../auth/authcontext';
 import logo from '../../assets/images/logo2.png';
 import './header.css';
@@ -13,13 +13,15 @@ const nav__links = [
 const Header = () => {
   const { isLoggedIn, logout, userName } = useContext(AuthContext);
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
   const [change,setChange]=useState('');
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
   const handleLogout = () => {
-    logout();
-    setMenuOpen(false);
+    logout(); // Call the logout function from context
+    setMenuOpen(false); // Close the menu
+    navigate('/login'); // Redirect to login page after logout
   };
 
   // Close menu when login status changes

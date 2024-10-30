@@ -1,10 +1,11 @@
 /* itineraryGenerate.css */
-.unique-itinerary-wrapper .itinerary-generate {
+.unique-itinerary-wrapper {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
   font-family: 'Roboto', Arial, sans-serif;
   color: #333;
+  margin-top: 2rem;
 }
 
 .unique-itinerary-wrapper .itinerary-content {
@@ -15,19 +16,20 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  margin-top: 3rem;
 }
 
 .unique-itinerary-wrapper h1 {
   font-size: 2.5rem;
   font-weight: 700;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  color: #091966;
 }
 
 .unique-itinerary-wrapper .section {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
 }
 
 .unique-itinerary-wrapper .section-header {
@@ -35,20 +37,21 @@
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  background-color: #e0e0e0;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
+  background-color: #f0f0f0;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .unique-itinerary-wrapper .section-header h2 {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-weight: 600;
-  margin-bottom: 0;
+  margin: 0;
+  color: #091966;
 }
 
 .unique-itinerary-wrapper .toggle-icon {
-  font-size: 1.5rem;
-  transition: transform 0.3s;
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
 }
 
 .unique-itinerary-wrapper .toggle-icon.expanded {
@@ -56,23 +59,47 @@
 }
 
 .unique-itinerary-wrapper .section-content {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease-out;
+  display: none;
+  padding: 1.5rem;
 }
 
 .unique-itinerary-wrapper .section-content.expanded {
-  max-height: 1000px;
-  transition: max-height 0.5s ease-in;
+  display: block;
 }
 
-.unique-itinerary-wrapper ul {
+.unique-itinerary-wrapper .section-content ul {
   list-style-type: none;
   padding: 0;
+  margin: 0;
 }
 
-.unique-itinerary-wrapper li {
-  margin-bottom: 0.5rem;
+.unique-itinerary-wrapper .section-content li {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.unique-itinerary-wrapper .section-content li:before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #091966;
+}
+
+.unique-itinerary-wrapper .day-itinerary {
+  margin-bottom: 2rem;
+}
+
+.unique-itinerary-wrapper .day-itinerary h3 {
+  color: #091966;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.unique-itinerary-wrapper .day-itinerary ul {
+  padding-left: 1.5rem;
 }
 
 .unique-itinerary-wrapper .save-itinerary-button {
@@ -80,29 +107,67 @@
   color: white;
   border: none;
   border-radius: 4px;
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s ease;
   align-self: flex-end;
+  margin-top: 2rem;
 }
 
 .unique-itinerary-wrapper .save-itinerary-button:hover {
-  background-color: #091966;
+  background-color: #0c2280;
 }
 
 .unique-itinerary-wrapper .loader {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 200px;
+  height: 300px;
   font-size: 1.2rem;
-  font-weight: 300;
+  color: #091966;
+}
+
+.unique-itinerary-wrapper .loader:after {
+  content: "...";
+  animation: dots 1.5s steps(5, end) infinite;
+}
+
+@keyframes dots {
+  0%, 20% { content: "."; }
+  40% { content: ".."; }
+  60% { content: "..."; }
+  80% { content: "...."; }
+  100% { content: "....."; }
 }
 
 .unique-itinerary-wrapper .error-message {
-  color: #ff0000;
+  color: #dc3545;
   font-weight: 500;
   text-align: center;
-  margin-top: 2rem;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .unique-itinerary-wrapper {
+    padding: 1rem;
+  }
+
+  .unique-itinerary-wrapper h1 {
+    font-size: 2rem;
+  }
+
+  .unique-itinerary-wrapper .section-header h2 {
+    font-size: 1.2rem;
+  }
+
+  .unique-itinerary-wrapper .save-itinerary-button {
+    width: 100%;
+    margin-top: 1.5rem;
+  }
 }

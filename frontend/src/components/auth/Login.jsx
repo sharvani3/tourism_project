@@ -1,3 +1,4 @@
+//Login.jsx
 import React, { useState, useContext } from "react";
 import { Container, Row, Col, Form, FormGroup, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Link } from "react-router-dom";
@@ -27,17 +28,24 @@ const Login = () => {
 
   const handleClick = async (e) => {
     e.preventDefault();
-
+  
     try {
       const response = await axios.post('http://localhost:7800/api/auth/login', credentials);
       const { token, user } = response.data;
-
-      await login(token, user); // Wait for login completion
+  
+      const userObject = {
+        username: user.username, // Get from the response
+        id: user.id,             // Get from the response
+        email: user.email,       // Use email from user object in response
+      };
+  
+      await login(token, userObject); // Wait for login completion
       setShowPopup(true);       // Show success popup
     } catch (err) {
       console.error("Login Error:", err);
     }
   };
+  
 
   // Close the popup and navigate to the home page
   const handleClosePopup = () => {
@@ -80,7 +88,7 @@ const Login = () => {
                       onChange={handleChange} 
                     />
                   </FormGroup>
-                  <Button className="btn secondary_btn auth_btn" type="submit" style={{ color: 'white' }}>
+                  <Button className="btn secondary_btn auth_btn" type="submit" >
                     Login
                   </Button>
                 </Form>
