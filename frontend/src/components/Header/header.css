@@ -75,4 +75,6 @@
     background-color: #070f4e !important; /* Darker navy blue on hover */
     color: white;
 }
-
+.welcome-msg {
+    font-weight: bold;
+}

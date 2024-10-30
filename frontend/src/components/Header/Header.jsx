@@ -71,7 +71,7 @@ const Header = () => {
                       </NavLink>
                     </li>
                     <li className="nav__item">
-                      <span className="welcome-msg">Welcome, {userName}!</span>
+                      <span id="wel" className="welcome-msg">Welcome, {userName}!</span>
                     </li>
                   </>
                 )}

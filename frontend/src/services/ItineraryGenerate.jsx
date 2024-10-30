@@ -93,18 +93,20 @@ const ItineraryGenerate = () => {
   };
 
   const saveItinerary = async () => {
+    const token = localStorage.getItem('token'); 
     try {
-      const response = await fetch('http://localhost:7800/api/itineraries/save', {
+      const response = await fetch('http://localhost:7800/api/itineraries/usersave', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
-        },
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}` // Ensure this line is correctly formatted
+        },       
         body: JSON.stringify(itineraryData)
       });
 
       if (response.ok) {
         alert('Itinerary saved successfully!');
-        navigate('/mytrips');
+        navigate('/mytrips'); // Navigate to My Trips after saving
       } else {
         alert('Failed to save itinerary');
       }

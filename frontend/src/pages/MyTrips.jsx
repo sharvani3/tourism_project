@@ -12,7 +12,15 @@ const MyTrips = () => {
 
   const fetchTrips = async () => {
     try {
-      const response = await fetch('http://localhost:7800/api/itineraries');
+      const token = localStorage.getItem('token'); // Retrieve the token from localStorage
+
+      const response = await fetch('http://localhost:7800/api/itineraries/userget', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}` // Attach the token in the Authorization header
+        }
+      });
+
       if (response.ok) {
         const data = await response.json();
         setTrips(data);
